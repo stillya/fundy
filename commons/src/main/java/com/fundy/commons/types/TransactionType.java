@@ -1,4 +1,4 @@
-package com.fundy.commons.dto.types;
+package com.fundy.commons.types;
 
 public enum TransactionType {
   INCOME,
