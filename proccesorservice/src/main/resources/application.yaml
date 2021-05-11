@@ -1,0 +1,12 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application.name: proccesor-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DB:proccesor_service}?currentSchema=${POSTGRESQL_SCHEMA:public}&ApplicationName=${POSTGRESQL_CONNECTION_NAME:proccesor-service}
+    username: ${POSTGRESQL_USER:postgres}
+    password: ${POSTGRESQL_PASSWORD:postgres}
