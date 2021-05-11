@@ -1,7 +1,7 @@
 package com.fundy.proccesorservice.entities;
 
-import com.fundy.proccesorservice.dto.types.CategoryType;
-import com.fundy.proccesorservice.dto.types.TransactionType;
+import com.fundy.commons.dto.types.CategoryType;
+import com.fundy.commons.dto.types.TransactionType;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.UUID;
