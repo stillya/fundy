@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "account", url = "${hosts.account-service}:${hosts.account-service-port}/${hosts.account-service-prefix}")
 public interface AccountClient {
 
-  @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
+  @RequestMapping(method = RequestMethod.GET, value = "/process/{userId}")
   AccountDto getAccount(@PathVariable("userId") UUID userId);
 
-  @RequestMapping(method = RequestMethod.GET, value = "/transactions")
+  @RequestMapping(method = RequestMethod.GET, value = "/process/transactions")
   List<TransactionDto> getTransactionsByPeriod(@RequestParam("accountId") String accountId,
       @RequestParam("startDate") @DateTimeFormat(iso = ISO.DATE_TIME)
           LocalDateTime startDate,
