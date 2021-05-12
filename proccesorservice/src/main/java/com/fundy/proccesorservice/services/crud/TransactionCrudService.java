@@ -28,7 +28,7 @@ public class TransactionCrudService {
   public List<TransactionDto> getTransactionsByPeriod(UUID accountId, LocalDateTime startDate,
       LocalDateTime endDate) {
     return this.transactionRepository
-        .getAllByAccountIdAndCreationDateBetween(accountId, startDate, endDate).stream()
+        .getAllByAccountIdAndCreationDateBetweenOrderByCreationDate(accountId, startDate, endDate).stream()
         .map(TransactionMapper.INSTANCE::toDto).collect(
             Collectors.toList());
   }

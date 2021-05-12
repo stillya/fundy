@@ -26,7 +26,7 @@ public class AccountCrudService {
   }
 
   public AccountDto getAccountById(UUID id) {
-    return AccountMapper.INSTANCE.toDto(this.accountRepository.getById(id));
+    return AccountMapper.INSTANCE.toDto(this.accountRepository.findById(id).get());
   }
 
   public AccountDto getAccountByUserId(UUID userId) {
@@ -35,10 +35,8 @@ public class AccountCrudService {
 
   @Transactional
   public AccountDto createAccount(AccountCreateDto dto) {
-    this.accountRepository.saveAndFlush(ConverterHelper.AccountCreateDtoAccountEntity(dto));
-    this.accountRepository.flush();
     return AccountMapper.INSTANCE
-        .toDto(this.accountRepository.getByUserId(dto.getUserId()));
+        .toDto(this.accountRepository.save(ConverterHelper.AccountCreateDtoAccountEntity(dto)));
   }
 
   @Transactional
@@ -48,8 +46,6 @@ public class AccountCrudService {
 
     account.setBalance(balance);
 
-    this.accountRepository.save(account);
-
-    return AccountMapper.INSTANCE.toDto(this.accountRepository.findById(accountId).get());
+    return AccountMapper.INSTANCE.toDto(this.accountRepository.save(account));
   }
 }

@@ -12,7 +12,7 @@ public interface TransactionRepository extends CrudRepository<TransactionEntity,
 
   List<TransactionEntity> getAllByAccountId(UUID id);
 
-  List<TransactionEntity> getAllByAccountIdAndCreationDateBetween(UUID id, LocalDateTime startDate,
+  List<TransactionEntity> getAllByAccountIdAndCreationDateBetweenOrderByCreationDate(UUID id, LocalDateTime startDate,
       LocalDateTime endDate);
 
 }

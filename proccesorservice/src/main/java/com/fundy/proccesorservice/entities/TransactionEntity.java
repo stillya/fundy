@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -59,6 +60,7 @@ public class TransactionEntity {
   @Column(name = "current_balance", nullable = false)
   private BigInteger currentBalance;
 
+  @CreationTimestamp
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
 
