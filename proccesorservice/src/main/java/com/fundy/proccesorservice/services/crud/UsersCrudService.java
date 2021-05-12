@@ -18,7 +18,7 @@ public class UsersCrudService {
   private final UserRepository userRepository;
 
   public List<UserDto> getUsers() {
-    return this.userRepository.getAll().stream().map(UserMapper.INSTANCE::toDto)
+    return this.userRepository.findAll().stream().map(UserMapper.INSTANCE::toDto)
         .collect(
             Collectors.toList());
   }

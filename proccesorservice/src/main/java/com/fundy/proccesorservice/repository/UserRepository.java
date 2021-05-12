@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, UUID> {
 
-  List<UserEntity> getAll();
+  List<UserEntity> findAll();
 
 }

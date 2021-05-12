@@ -11,6 +11,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class TransactionCrudService {
             Collectors.toList());
   }
 
+  @Transactional
   public TransactionDto createTransaction(TransactionCreateDto dto) {
     return TransactionMapper.INSTANCE.toDto(this.transactionRepository
         .save(ConverterHelper.TransactionCreateDtoTransactionEntity(dto)));

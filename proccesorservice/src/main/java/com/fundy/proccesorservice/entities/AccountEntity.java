@@ -40,8 +40,9 @@ public class AccountEntity {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "balance", nullable = false)
-  private BigInteger balance;
+  @Column(name = "balance", columnDefinition = "bigint default 0", nullable = false)
+  @Builder.Default
+  private BigInteger balance = BigInteger.valueOf(0);
 
   //
   // RELATIONS

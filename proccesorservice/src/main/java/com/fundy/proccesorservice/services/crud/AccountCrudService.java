@@ -21,7 +21,7 @@ public class AccountCrudService {
   private final AccountRepository accountRepository;
 
   public List<AccountDto> getAccounts() {
-    return this.accountRepository.getAll().stream().map(AccountMapper.INSTANCE::toDto)
+    return this.accountRepository.findAll().stream().map(AccountMapper.INSTANCE::toDto)
         .collect(Collectors.toList());
   }
 
@@ -35,8 +35,10 @@ public class AccountCrudService {
 
   @Transactional
   public AccountDto createAccount(AccountCreateDto dto) {
+    this.accountRepository.saveAndFlush(ConverterHelper.AccountCreateDtoAccountEntity(dto));
+    this.accountRepository.flush();
     return AccountMapper.INSTANCE
-        .toDto(this.accountRepository.save(ConverterHelper.AccountCreateDtoAccountEntity(dto)));
+        .toDto(this.accountRepository.getByUserId(dto.getUserId()));
   }
 
   @Transactional
@@ -46,6 +48,8 @@ public class AccountCrudService {
 
     account.setBalance(balance);
 
-    return AccountMapper.INSTANCE.toDto(this.accountRepository.save(account));
+    this.accountRepository.save(account);
+
+    return AccountMapper.INSTANCE.toDto(this.accountRepository.findById(accountId).get());
   }
 }
