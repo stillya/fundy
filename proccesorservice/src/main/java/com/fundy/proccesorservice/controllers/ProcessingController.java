@@ -44,6 +44,14 @@ public class ProcessingController {
         .getTransactionsByPeriod(UUID.fromString(accountId), startDate, endDate);
   }
 
+  @GetMapping(path = "/transactions/limited")
+  public List<TransactionDto> getLimitedTransactionsWithOffset(
+      @RequestParam("accountId") String accountId,
+      @RequestParam("limit") int limit, @RequestParam("offset") int offset) {
+    return this.transactionCrudService
+        .getLimitedTransactionsWithOffset(UUID.fromString(accountId), limit, offset);
+  }
+
   @PostMapping(path = "/income")
   public AccountDto addIncome(@RequestBody TransactionCreateDto transaction) {
     return this.processingService.addIncome(transaction);
@@ -59,4 +67,8 @@ public class ProcessingController {
     return this.processingService.createAccount(account);
   }
 
+  @GetMapping(path = "/count")
+  public long countTransactions(@RequestParam("accountId") UUID accountId) {
+    return this.transactionCrudService.count(accountId);
+  }
 }

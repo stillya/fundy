@@ -27,7 +27,7 @@ public class StatisticService {
       LocalDateTime endDate) {
     AccountDto account = this.client.getAccount(userId);
     List<TransactionDto> transactions = this.client
-        .getTransactionsByPeriod(account.getId().toString(), startDate, endDate).stream()
+        .getTransactionsByPeriod(account.getId(), startDate, endDate).stream()
         .filter(t -> t.getType().equals(
             TransactionType.INCOME)).collect(Collectors.toList());
 
@@ -55,7 +55,7 @@ public class StatisticService {
       LocalDateTime endDate) {
     AccountDto account = this.client.getAccount(userId);
     return this.client
-        .getTransactionsByPeriod(account.getId().toString(), startDate, endDate).stream()
+        .getTransactionsByPeriod(account.getId(), startDate, endDate).stream()
         .filter(t -> t.getType().equals(
             TransactionType.INCOME)).map(TransactionDto::getAmount).reduce(BigInteger::add).get();
   }
@@ -65,7 +65,7 @@ public class StatisticService {
       LocalDateTime endDate) {
     AccountDto account = this.client.getAccount(userId);
     return this.client
-        .getTransactionsByPeriod(account.getId().toString(), startDate, endDate).stream()
+        .getTransactionsByPeriod(account.getId(), startDate, endDate).stream()
         .filter(t -> t.getType().equals(
             TransactionType.EXPENSE)).map(TransactionDto::getAmount).reduce(BigInteger::add).get();
 

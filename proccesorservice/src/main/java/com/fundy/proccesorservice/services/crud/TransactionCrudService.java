@@ -28,7 +28,16 @@ public class TransactionCrudService {
   public List<TransactionDto> getTransactionsByPeriod(UUID accountId, LocalDateTime startDate,
       LocalDateTime endDate) {
     return this.transactionRepository
-        .getAllByAccountIdAndCreationDateBetweenOrderByCreationDate(accountId, startDate, endDate).stream()
+        .getAllByAccountIdAndCreationDateBetweenOrderByCreationDate(accountId, startDate, endDate)
+        .stream()
+        .map(TransactionMapper.INSTANCE::toDto).collect(
+            Collectors.toList());
+  }
+
+  public List<TransactionDto> getLimitedTransactionsWithOffset(UUID accountId, int limit,
+      int offset) {
+    return this.transactionRepository
+        .getAllByAccountIdWithOffset(accountId, limit, offset).stream()
         .map(TransactionMapper.INSTANCE::toDto).collect(
             Collectors.toList());
   }
@@ -37,6 +46,10 @@ public class TransactionCrudService {
   public TransactionDto createTransaction(TransactionCreateDto dto) {
     return TransactionMapper.INSTANCE.toDto(this.transactionRepository
         .save(ConverterHelper.TransactionCreateDtoTransactionEntity(dto)));
+  }
+
+  public long count(UUID accountId) {
+    return this.transactionRepository.count();
   }
 
 }

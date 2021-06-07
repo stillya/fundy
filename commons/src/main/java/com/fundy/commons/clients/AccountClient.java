@@ -19,10 +19,17 @@ public interface AccountClient {
   @RequestMapping(method = RequestMethod.GET, value = "/process/{userId}")
   AccountDto getAccount(@PathVariable("userId") UUID userId);
 
+  @RequestMapping(method = RequestMethod.GET, value = "/process/count")
+  long count(@RequestParam("accountId") UUID accountId);
+
   @RequestMapping(method = RequestMethod.GET, value = "/process/transactions")
-  List<TransactionDto> getTransactionsByPeriod(@RequestParam("accountId") String accountId,
+  List<TransactionDto> getTransactionsByPeriod(@RequestParam("accountId") UUID accountId,
       @RequestParam("startDate") @DateTimeFormat(iso = ISO.DATE_TIME)
           LocalDateTime startDate,
       @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
           LocalDateTime endDate);
+
+  @RequestMapping(method = RequestMethod.GET, value = "/process/transactions/limited")
+  List<TransactionDto> getLimitedTransactionsWithOffset(@RequestParam("accountId") UUID accountId,
+      @RequestParam("limit") int limit, @RequestParam("offset") int offset);
 }
