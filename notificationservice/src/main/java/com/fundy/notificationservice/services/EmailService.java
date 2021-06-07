@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EmailService {
 
-  private final AccountClient accountClient;
   private final JavaMailSender emailSender;
+  private final AccountClient accountClient;
 
   private static final String SOURCE_ADDRESS = "noreply@fundy.com";
   private static final String SUBJECT = "STATISTIC FROM FUNDY";

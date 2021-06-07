@@ -5,7 +5,9 @@ server:
 
 spring:
   application.name: statistic-service
-
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html
 hosts:
   account-service: http://localhost
   account-service-port: 8080

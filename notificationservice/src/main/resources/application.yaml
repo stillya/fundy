@@ -6,7 +6,12 @@ server:
 spring:
   application.name: notification-service
   mail:
-    host:
-    port:
-    username:
-    password:
+    host: test
+    port: 1
+    username: test
+    password: test
+
+hosts:
+  account-service: http://localhost
+  account-service-port: 8080
+  account-service-prefix: api
